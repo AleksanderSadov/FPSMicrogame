@@ -9857,6 +9857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mesh_Health_Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 93b1ab0ae86bdf7459bbdf258c9dec49, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 93b1ab0ae86bdf7459bbdf258c9dec49, type: 3}
       propertyPath: m_RootOrder
       value: 1
