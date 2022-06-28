@@ -55,11 +55,11 @@ MonoBehaviour:
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 21300000, guid: 14aa1febcf423c84997aa10d7ff64d17, type: 3}
     CrosshairSize: 100
-    CrosshairColor: {r: 0.32941175, g: 0.9400479, b: 1, a: 0.45490196}
+    CrosshairColor: {r: 1, g: 1, b: 1, a: 0.38431373}
   CrosshairDataTargetInSight:
     CrosshairSprite: {fileID: 21300000, guid: 14aa1febcf423c84997aa10d7ff64d17, type: 3}
     CrosshairSize: 100
-    CrosshairColor: {r: 0.32941175, g: 0.9411765, b: 1, a: 0.45490196}
+    CrosshairColor: {r: 1, g: 1, b: 1, a: 0.38431373}
   WeaponRoot: {fileID: 5646165488041817916}
   WeaponMuzzle: {fileID: 2749496858225023403}
   ShootType: 2
