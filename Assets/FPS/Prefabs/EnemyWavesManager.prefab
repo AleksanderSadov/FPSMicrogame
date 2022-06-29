@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveStartDelayInSeconds: 3
+  spawnRadius: 30
   currentWaveCount: 0
   objectivesParent: {fileID: 0}
   enemiesParent: {fileID: 0}

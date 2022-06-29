@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.FPS.Game;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Unity.FPS.Gameplay
 {
@@ -8,6 +9,9 @@ namespace Unity.FPS.Gameplay
     {
         [Tooltip("Delay before wave starts in seconds")]
         public int waveStartDelayInSeconds = 1;
+
+        [Tooltip("Spawn radius in units from the spawner location")]
+        public int spawnRadius = 1;
 
         [Tooltip("Current wave count")]
         [SerializeField] private int currentWaveCount = 0;
@@ -27,9 +31,12 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Turret enemy prefab")]
         [SerializeField] private GameObject turretEnemy;
 
+        private Vector3 spawnDefaultPosition;
+
         // Start is called before the first frame update
         void Start()
         {
+            spawnDefaultPosition = transform.position;
             EventManager.AddListener<WaveCompleteEvent>(OnWaveComplete);
             StartNextWaveWithDelay(waveStartDelayInSeconds);
         }
@@ -54,7 +61,8 @@ namespace Unity.FPS.Gameplay
 
         private void SpawnWaveEnemies()
         {
-            Instantiate(hoverBotEnemy, Vector3.zero, hoverBotEnemy.transform.rotation, enemiesParent.transform);
+            GameObject enemy = Instantiate(hoverBotEnemy, spawnDefaultPosition, hoverBotEnemy.transform.rotation, enemiesParent.transform);
+            MoveEnemyToRandomSpawnPosition(enemy);
         }
 
         private void CreateKillWaveObjective()
@@ -66,6 +74,35 @@ namespace Unity.FPS.Gameplay
         private void OnWaveComplete(WaveCompleteEvent evt)
         {
             StartNextWaveWithDelay(waveStartDelayInSeconds);
+        }
+
+        private void MoveEnemyToRandomSpawnPosition(GameObject enemy)
+        {
+            Vector3 randomSpawnPosition;
+            if (FindRandomSpawnPosition(spawnDefaultPosition, spawnRadius, out randomSpawnPosition))
+            {
+                enemy.GetComponent<NavMeshAgent>().Warp(randomSpawnPosition);
+            }
+        }
+
+        private bool FindRandomSpawnPosition(Vector3 center, float range, out Vector3 result)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                Vector3 randomPoint = center + new Vector3(
+                    Random.Range(-range, range),
+                    1,
+                    Random.Range(-range, range)
+                );
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+                {
+                    result = hit.position;
+                    return true;
+                }
+            }
+            result = Vector3.zero;
+            return false;
         }
     }
 }
