@@ -63,4 +63,6 @@ namespace Unity.FPS.Game
         public string Message;
         public float DelayBeforeDisplay;
     }
+
+    public class CompleteTriggerEvent : GameEvent { }
 }
