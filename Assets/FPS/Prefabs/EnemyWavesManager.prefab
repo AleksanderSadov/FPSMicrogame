@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveStartDelayInSeconds: 3
-  waveNumber: 1
+  currentWaveCount: 0
   objectivesParent: {fileID: 0}
   enemiesParent: {fileID: 0}
   killWaveObjective: {fileID: 1230498008701396792, guid: a50db6dad94fd954b88c91bb79f77643,

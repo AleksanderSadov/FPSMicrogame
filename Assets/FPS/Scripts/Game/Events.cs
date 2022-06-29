@@ -16,6 +16,8 @@ namespace Unity.FPS.Game
         public static AmmoPickupEvent AmmoPickupEvent = new AmmoPickupEvent();
         public static DamageEvent DamageEvent = new DamageEvent();
         public static DisplayMessageEvent DisplayMessageEvent = new DisplayMessageEvent();
+        public static CompleteTriggerEvent CompleteTriggerEvent = new CompleteTriggerEvent();
+        public static WaveCompleteEvent WaveCompleteEvent = new WaveCompleteEvent();
     }
 
     public class ObjectiveUpdateEvent : GameEvent
@@ -65,4 +67,6 @@ namespace Unity.FPS.Game
     }
 
     public class CompleteTriggerEvent : GameEvent { }
+
+    public class WaveCompleteEvent : GameEvent { }
 }
