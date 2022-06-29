@@ -95,7 +95,9 @@ namespace Unity.FPS.Gameplay
                     Random.Range(-range, range)
                 );
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+                int maxDistance = 1;
+                int walkableAreaMask = 1 << NavMesh.GetAreaFromName("Walkable"); // Need to bit shift area according to docs example
+                if (NavMesh.SamplePosition(randomPoint, out hit, maxDistance, walkableAreaMask))
                 {
                     result = hit.position;
                     return true;
