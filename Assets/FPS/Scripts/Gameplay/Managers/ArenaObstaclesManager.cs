@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.FPS.Game;
 using UnityEngine;
 
 namespace Unity.FPS.Gameplay
@@ -7,13 +8,11 @@ namespace Unity.FPS.Gameplay
     public class ArenaObstaclesManager : MonoBehaviour
     {
         [SerializeField] private GameObject floorContainer;
-        [SerializeField] private List<GameObject> obstaclesPrefabs = new List<GameObject>();
-        [SerializeField] private List<GameObject> activeObstacles = new List<GameObject>();
 
         // Start is called before the first frame update
         void Start()
         {
-            ReplaceFloorTileWithLava(SelectRandomFloorTile());
+            EventManager.AddListener<WaveCompleteEvent>(OnWaveComplete);
         }
 
         // Update is called once per frame
@@ -22,22 +21,45 @@ namespace Unity.FPS.Gameplay
 
         }
 
-        private void ReplaceFloorTileWithLava(GameObject floorTile)
+        private void ReplaceFloorTilesWithLava(List<int> tilesIndexes)
         {
-            GameObject floorMesh = floorTile.transform.GetChild(0).gameObject;
-            GameObject lavaMesh = floorTile.transform.GetChild(1).gameObject;
-
-            if (!lavaMesh.activeSelf)
+            foreach (int index in tilesIndexes)
             {
-                lavaMesh.SetActive(true);
-                floorMesh.SetActive(false);
+                GameObject floorTile = floorContainer.transform.GetChild(index).gameObject;
+                GameObject standardFloorMesh = floorTile.transform.GetChild(0).gameObject;
+                GameObject lavaMesh = floorTile.transform.GetChild(1).gameObject;
+
+                if (!lavaMesh.activeSelf)
+                {
+                    lavaMesh.SetActive(true);
+                    standardFloorMesh.SetActive(false);
+                }
             }
         }
 
-        private GameObject SelectRandomFloorTile()
+        private List<int> GetRandomFloorTilesIndexes(int minNeighbourRange, int maxNeighbourRange)
         {
-            int randomTileIndex = Random.Range(0, floorContainer.transform.childCount - 1);
-            return floorContainer.transform.GetChild(randomTileIndex).gameObject;
+            List<int> randomTilesIndexes = new List<int>();
+
+            int floorChildsCount = floorContainer.transform.childCount;
+            int randomTileIndex = Random.Range(0, floorChildsCount - 1);
+            int randomNeighbourRange = Random.Range(minNeighbourRange, maxNeighbourRange);
+
+            for (int i = -randomNeighbourRange; i <= randomNeighbourRange; i++)
+            {
+                int neighbourSizeTileIndex = randomTileIndex + i;
+                if (neighbourSizeTileIndex > 0 && neighbourSizeTileIndex < floorChildsCount)
+                {
+                    randomTilesIndexes.Add(neighbourSizeTileIndex);
+                }
+            }
+
+            return randomTilesIndexes;
+        }
+
+        private void OnWaveComplete(WaveCompleteEvent evt)
+        {
+            ReplaceFloorTilesWithLava(GetRandomFloorTilesIndexes(1, 3));
         }
     }
 }
