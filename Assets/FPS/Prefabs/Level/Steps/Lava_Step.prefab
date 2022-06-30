@@ -51,7 +51,7 @@ GameObject:
   m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!4 &6663834164839912176
 Transform:
@@ -240,19 +240,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lavaDamage: 10
+  maxLift: 3
+  maxIntensity: 16
   isHeated: 0
   isCooled: 0
   isLifted: 0
   isLowered: 0
   currentIntensity: 1
   minIntensity: 1
-  maxIntensity: 16
   heatSpeed: 4
   startHeating: 0
   startCooling: 0
   currentLift: -3
   minLift: -3
-  maxLift: 3
   liftSpeed: 2
   startLifting: 0
   startLowering: 0
