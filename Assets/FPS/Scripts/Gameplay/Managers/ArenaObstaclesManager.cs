@@ -7,18 +7,23 @@ namespace Unity.FPS.Gameplay
 {
     public class ArenaObstaclesManager : MonoBehaviour
     {
-        [Tooltip("Minimum additional radius around random lava tile")]
-        public int minLavaPuddleSize = 1;
+        [Tooltip("Minimum additional radius around random tile")]
+        public int minRandomTileRadius = 1;
 
-        [Tooltip("Maximum additional radius around random lava tile")]
-        public int maxLavaPuddleSize = 3;
+        [Tooltip("Maximum additional radius around random tile")]
+        public int maxRandomTileRadius = 3;
 
-        [Tooltip("Maximum number of lava tiles in arena." +
+        [Tooltip("Maximum number of heated lava tiles in arena." +
             " Exceeding this limit will start cooling random lava tiles to match limit")]
-        public int maxLavaTiles = 300;
+        public int maxHeatedTiles = 192;
+
+        [Tooltip("Maximum number of lifted lava tiles in arena." +
+            " Exceeding this limit will start lowering random lava tiles to match limit")]
+        public int maxLiftedTiles = 64;
 
         [SerializeField] private GameObject floorContainer;
         [SerializeField] private List<Lava> heatedLavaList = new List<Lava>();
+        [SerializeField] private List<Lava> liftedLavaList = new List<Lava>();
 
         // Start is called before the first frame update
         void Start()
@@ -32,7 +37,7 @@ namespace Unity.FPS.Gameplay
 
         }
 
-        private void StartHeatingLava(List<int> tilesIndexes)
+        private void HeatupLava(List<int> tilesIndexes)
         {
             foreach (int index in tilesIndexes)
             {
@@ -43,14 +48,37 @@ namespace Unity.FPS.Gameplay
                 heatedLavaList.Add(lava);
             }
 
-            if (heatedLavaList.Count > maxLavaTiles)
+            if (heatedLavaList.Count > maxHeatedTiles)
             {
-                int cooloffCount = heatedLavaList.Count - maxLavaTiles;
+                int cooloffCount = heatedLavaList.Count - maxHeatedTiles;
                 for (int i = 0; i < cooloffCount; i++)
                 {
                     int randomIndex = Random.Range(0, heatedLavaList.Count - 1);
                     heatedLavaList[randomIndex].StartCooling();
                     heatedLavaList.RemoveAt(randomIndex);
+                }
+            }
+        }
+
+        private void LiftLava(List<int> tilesIndexes)
+        {
+            foreach (int index in tilesIndexes)
+            {
+                GameObject floorTile = floorContainer.transform.GetChild(index).gameObject;
+                GameObject lavaMesh = floorTile.transform.GetChild(0).gameObject;
+                Lava lava = lavaMesh.GetComponent<Lava>();
+                lava.StartLifting(Random.Range(-2, 3));
+                liftedLavaList.Add(lava);
+            }
+
+            if (liftedLavaList.Count > maxLiftedTiles)
+            {
+                int lowerDownCount = liftedLavaList.Count - maxLiftedTiles;
+                for (int i = 0; i < lowerDownCount; i++)
+                {
+                    int randomIndex = Random.Range(0, liftedLavaList.Count - 1);
+                    liftedLavaList[randomIndex].StartLowering();
+                    liftedLavaList.RemoveAt(randomIndex);
                 }
             }
         }
@@ -77,7 +105,8 @@ namespace Unity.FPS.Gameplay
 
         private void OnWaveComplete(WaveCompleteEvent evt)
         {
-            StartHeatingLava(GetRandomFloorTilesIndexes(minLavaPuddleSize, maxLavaPuddleSize));
+            HeatupLava(GetRandomFloorTilesIndexes(minRandomTileRadius, maxRandomTileRadius));
+            LiftLava(GetRandomFloorTilesIndexes(minRandomTileRadius, maxRandomTileRadius));
         }
     }
 }
