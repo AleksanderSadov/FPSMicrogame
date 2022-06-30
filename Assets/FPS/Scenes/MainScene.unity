@@ -31781,9 +31781,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4688727698526978418, guid: 7781784402352ee48b6b5b76c58f6e34,
         type: 3}
+      propertyPath: maxLavaTiles
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4688727698526978418, guid: 7781784402352ee48b6b5b76c58f6e34,
+        type: 3}
       propertyPath: floorContainer
       value: 
       objectReference: {fileID: 1380897722}
+    - target: {fileID: 4688727698526978418, guid: 7781784402352ee48b6b5b76c58f6e34,
+        type: 3}
+      propertyPath: maxLavaPuddleSize
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4688727698526978418, guid: 7781784402352ee48b6b5b76c58f6e34,
         type: 3}
       propertyPath: obstaclesPrefabs.Array.size
