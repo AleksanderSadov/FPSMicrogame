@@ -214,6 +214,8 @@ namespace Unity.FPS.Gameplay
             UpdateCharacterHeight(false);
 
             HandleCharacterMovement();
+
+            LavaCheck();
         }
 
         void OnDie()
@@ -259,6 +261,33 @@ namespace Unity.FPS.Gameplay
                         {
                             m_Controller.Move(Vector3.down * hit.distance);
                         }
+                    }
+                }
+            }
+        }
+
+        void LavaCheck()
+        {
+            if (!IsGrounded)
+                return;
+
+            if (Physics.CapsuleCast(
+                GetCapsuleBottomHemisphere(),
+                GetCapsuleTopHemisphere(m_Controller.height),
+                m_Controller.radius,
+                Vector3.down,
+                out RaycastHit hit,
+                m_Controller.skinWidth + GroundCheckDistance,
+                GroundCheckLayers,
+                QueryTriggerInteraction.Ignore))
+            {
+                if (hit.collider.CompareTag("Lava"))
+                {
+                    Lava lava = hit.collider.GetComponent<Lava>();
+                    Damageable damageable = GetComponent<Damageable>();
+                    if (lava.isHeated && damageable)
+                    {
+                        damageable.InflictDamage(lava.lavaDamage * Time.deltaTime, false, lava.gameObject);
                     }
                 }
             }
