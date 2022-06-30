@@ -21,19 +21,14 @@ namespace Unity.FPS.Gameplay
 
         }
 
-        private void ReplaceFloorTilesWithLava(List<int> tilesIndexes)
+        private void StartHeatingLava(List<int> tilesIndexes)
         {
             foreach (int index in tilesIndexes)
             {
                 GameObject floorTile = floorContainer.transform.GetChild(index).gameObject;
-                GameObject standardFloorMesh = floorTile.transform.GetChild(0).gameObject;
-                GameObject lavaMesh = floorTile.transform.GetChild(1).gameObject;
-
-                if (!lavaMesh.activeSelf)
-                {
-                    lavaMesh.SetActive(true);
-                    standardFloorMesh.SetActive(false);
-                }
+                GameObject lavaMesh = floorTile.transform.GetChild(0).gameObject;
+                Lava lava = lavaMesh.GetComponent<Lava>();
+                lava.StartHeating();
             }
         }
 
@@ -59,7 +54,7 @@ namespace Unity.FPS.Gameplay
 
         private void OnWaveComplete(WaveCompleteEvent evt)
         {
-            ReplaceFloorTilesWithLava(GetRandomFloorTilesIndexes(1, 3));
+            StartHeatingLava(GetRandomFloorTilesIndexes(1, 3));
         }
     }
 }
