@@ -47,6 +47,7 @@ MonoBehaviour:
   spawnRadius: 32
   waveHoverbotsCount: 1
   waveTurretsCount: 0
+  lootHealthPackChance: 0.25
   waveCurrentCount: 0
   objectivesParent: {fileID: 0}
   enemiesParent: {fileID: 0}
@@ -59,4 +60,12 @@ MonoBehaviour:
   enemyTurret: {fileID: 2015434656898269652, guid: e29d43f43cc5d82499dd9926e01847d3,
     type: 3}
   lootJetpack: {fileID: 2620131183356007192, guid: 0bb4e7bdf1aec0247854edd179ed1557,
+    type: 3}
+  lootHealthPack: {fileID: 2529580269645609534, guid: 9973c412032becb4ca116ca08be62edf,
+    type: 3}
+  lootShotgun: {fileID: 788039066339116837, guid: 7a3d433f6cc686a49ae65db338ec0146,
+    type: 3}
+  lootLauncher: {fileID: 7396602809123278251, guid: bf6c7c08c3afe5a4c8a6c26aeebb7e53,
+    type: 3}
+  lootSniperRifle: {fileID: 1177030171653435532, guid: 51e56850ad9301d4b830925e37a72e7c,
     type: 3}

@@ -19,7 +19,7 @@ namespace Unity.FPS.Gameplay
         public int waveTurretsCount = 0;
 
         [Tooltip("Loot health pack chance from hoverbots")]
-        public float lootHealthPackChance = 0.1f;
+        public float lootHealthPackChance = 0.25f;
 
         [Tooltip("Current wave count")]
         [SerializeField] private int waveCurrentCount = 0;
@@ -47,6 +47,15 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Loot health pack prefab")]
         [SerializeField] private GameObject lootHealthPack;
+
+        [Tooltip("Loot shotgun prefab")]
+        [SerializeField] private GameObject lootShotgun;
+
+        [Tooltip("Loot launcher prefab")]
+        [SerializeField] private GameObject lootLauncher;
+
+        [Tooltip("Loot sniper rifle prefab")]
+        [SerializeField] private GameObject lootSniperRifle;
 
         private Vector3 spawnDefaultPosition;
         private List<EnemySpawnQueueItem> enemySpawnQueue = new List<EnemySpawnQueueItem>();
@@ -92,14 +101,38 @@ namespace Unity.FPS.Gameplay
         {
             switch (waveCurrentCount)
             {
+                case 1:
+                    waveHoverbotsCount = 1;
+                    break;
                 case 3:
-                    waveHoverbotsCount++;
+                    waveHoverbotsCount = 2;
                     break;
                 case 5:
-                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootJetpack, 1));
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootShotgun, 1));
                     break;
                 case 6:
-                    waveHoverbotsCount++;
+                    waveHoverbotsCount = 3;
+                    break;
+                case 10:
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootJetpack, 1));
+                    break;
+                case 13:
+                    waveHoverbotsCount = 4;
+                    break;
+                case 15:
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootLauncher, 1));
+                    break;
+                case 16:
+                    waveTurretsCount = 1;
+                    break;
+                case 20:
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootSniperRifle, 1));
+                    break;
+                case 23:
+                    waveTurretsCount = 2;
+                    break;
+                case 25:
+                    waveHoverbotsCount = 5;
                     break;
                 default:
                     break;
