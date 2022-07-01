@@ -75,6 +75,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 924312020967758901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7396602809123278251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7671270577186476446, guid: a7fa348d53593bb42922672c6cf40651,
+    type: 3}
+  m_PrefabInstance: {fileID: 924312020967758901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4819954088360247406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7396602809123278251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b7698ec50c85c44a849a968dc1d57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CompassMarkerPrefab: {fileID: 5587066761853311987, guid: a8aba6466c041dd4fbc0fcd19033f6db,
+    type: 3}
+  TextDirection: 
 --- !u!1001 &5642972803492488461
 PrefabInstance:
   m_ObjectHideFlags: 0
