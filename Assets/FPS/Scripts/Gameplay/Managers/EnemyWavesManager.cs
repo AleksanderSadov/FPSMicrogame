@@ -113,26 +113,33 @@ namespace Unity.FPS.Gameplay
                 case 6:
                     waveHoverbotsCount = 3;
                     break;
-                case 10:
+                case 7:
                     enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootJetpack, 1));
                     break;
-                case 13:
+                case 8:
                     waveHoverbotsCount = 4;
                     break;
-                case 15:
-                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootLauncher, 1));
-                    break;
-                case 16:
-                    waveTurretsCount = 1;
-                    break;
-                case 20:
+                case 9:
                     enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootSniperRifle, 1));
                     break;
-                case 23:
+                case 10:
+                    waveHoverbotsCount = 5;
+                    waveTurretsCount = 1;
+                    break;
+                case 12:
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootLauncher, 1));
+                    break;
+                case 14:
                     waveTurretsCount = 2;
                     break;
-                case 25:
-                    waveHoverbotsCount = 5;
+                case 16:
+                    waveTurretsCount = 3;
+                    break;
+                case int n when n >= 20 && n % 5 == 0 && n % 10 == 5:
+                    waveHoverbotsCount++;
+                    break;
+                case int n when n >= 20 && n % 10 == 0:
+                    waveTurretsCount++;
                     break;
                 default:
                     break;
