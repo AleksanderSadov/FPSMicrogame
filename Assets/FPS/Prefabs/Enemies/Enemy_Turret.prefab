@@ -453,8 +453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectionSourcePoint: {fileID: 6571005840976436832}
-  DetectionRange: 30
-  AttackRange: 35
+  DetectionRange: 100
+  AttackRange: 24
   KnownTargetTimeout: 4
   Animator: {fileID: 0}
 --- !u!1 &7448957880145452174
