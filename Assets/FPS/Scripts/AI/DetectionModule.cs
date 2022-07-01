@@ -19,6 +19,9 @@ namespace Unity.FPS.AI
         [Tooltip("Time before an enemy abandons a known target that it can't see anymore")]
         public float KnownTargetTimeout = 4f;
 
+        [Tooltip("Time before an enemy starts detection")]
+        public float DetectionStartDelay = 0f;
+
         [Tooltip("Optional animator for OnShoot animations")]
         public Animator Animator;
 
@@ -31,6 +34,7 @@ namespace Unity.FPS.AI
         public bool HadKnownTarget { get; private set; }
 
         protected float TimeLastSeenTarget = Mathf.NegativeInfinity;
+        protected float TimeCreated;
 
         ActorsManager m_ActorsManager;
 
@@ -39,12 +43,18 @@ namespace Unity.FPS.AI
 
         protected virtual void Start()
         {
+            TimeCreated = Time.time;
             m_ActorsManager = FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, DetectionModule>(m_ActorsManager, this);
         }
 
         public virtual void HandleTargetDetection(Actor actor, Collider[] selfColliders)
         {
+            if (DetectionStartDelay > 0 && Time.time - TimeCreated < DetectionStartDelay)
+            {
+                return;
+            }
+
             // Handle known target detection timeout
             if (KnownDetectedTarget && !IsSeeingTarget && (Time.time - TimeLastSeenTarget) > KnownTargetTimeout)
             {
