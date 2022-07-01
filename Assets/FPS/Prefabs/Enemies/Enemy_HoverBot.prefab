@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 2015434656898269652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.263626, y: 0.08333349, z: -33.16483}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 320366457750808919}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 320366457759794871}
-  AttackStopDistanceRatio: 0.08
+  AttackStopDistanceRatio: 0.25
   RandomHitSparks:
   - {fileID: 9125706537325074547}
   - {fileID: 8158939429672774431}
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectionSourcePoint: {fileID: 6571005840976436832}
   DetectionRange: 100
-  AttackRange: 24
+  AttackRange: 36
   KnownTargetTimeout: 12
   DetectionStartDelay: 2
   Animator: {fileID: 0}
