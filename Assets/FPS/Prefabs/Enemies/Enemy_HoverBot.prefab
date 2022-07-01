@@ -1232,6 +1232,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_EnemySpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 7692336672675980230, guid: 86cdb1dfefc2d184c8143c6eaf11cd68,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86cdb1dfefc2d184c8143c6eaf11cd68, type: 3}
 --- !u!1001 &1680067821895709280
