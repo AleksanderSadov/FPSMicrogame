@@ -179,6 +179,7 @@ namespace Unity.FPS.Gameplay
         {
             GameObject killWaveObject = Instantiate(objectiveKillWave, objectivesParent.transform);
             killWaveObject.GetComponent<ObjectiveKillWave>().WaveCount = waveCurrentCount;
+            killWaveObject.GetComponent<ObjectiveKillWave>().EnemiesInWave = enemiesParent.transform.childCount;
         }
 
         private void OnWaveCompleteAndNavMeshReady(NavMeshReadyEvent evt)
