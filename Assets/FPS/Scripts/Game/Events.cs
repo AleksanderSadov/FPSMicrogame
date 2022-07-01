@@ -18,6 +18,8 @@ namespace Unity.FPS.Game
         public static DisplayMessageEvent DisplayMessageEvent = new DisplayMessageEvent();
         public static CompleteTriggerEvent CompleteTriggerEvent = new CompleteTriggerEvent();
         public static WaveCompleteEvent WaveCompleteEvent = new WaveCompleteEvent();
+        public static ArenaReadyEvent ArenaReadyEvent = new ArenaReadyEvent();
+        public static NavMeshReadyEvent NavMeshReadyEvent = new NavMeshReadyEvent();
     }
 
     public class ObjectiveUpdateEvent : GameEvent
@@ -69,4 +71,8 @@ namespace Unity.FPS.Game
     public class CompleteTriggerEvent : GameEvent { }
 
     public class WaveCompleteEvent : GameEvent { }
+
+    public class ArenaReadyEvent : GameEvent { }
+
+    public class NavMeshReadyEvent : GameEvent { }
 }

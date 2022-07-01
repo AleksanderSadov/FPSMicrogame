@@ -21,6 +21,9 @@ namespace Unity.FPS.Gameplay
             " Exceeding this limit will start lowering random lava tiles to match limit")]
         public int maxLiftedTiles = 64;
 
+        [Tooltip("Timeout to wait until lava lifted and arena is ready")]
+        public int arenaReadyTimeoutInSeconds = 3;
+
         [SerializeField] private GameObject floorContainer;
         [SerializeField] private List<Lava> heatedLavaList = new List<Lava>();
         [SerializeField] private List<Lava> liftedLavaList = new List<Lava>();
@@ -29,12 +32,7 @@ namespace Unity.FPS.Gameplay
         void Start()
         {
             EventManager.AddListener<WaveCompleteEvent>(OnWaveComplete);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            BuildArena();
         }
 
         private void HeatupLava(List<int> tilesIndexes)
@@ -105,8 +103,21 @@ namespace Unity.FPS.Gameplay
 
         private void OnWaveComplete(WaveCompleteEvent evt)
         {
+            BuildArena();
+        }
+
+        private IEnumerator WaitOnArenaReadyCoroutine()
+        {
+            yield return new WaitForSeconds(arenaReadyTimeoutInSeconds);
+            ArenaReadyEvent arenaReadyEvent = Events.ArenaReadyEvent;
+            EventManager.Broadcast(arenaReadyEvent);
+        }
+
+        private void BuildArena()
+        {
             HeatupLava(GetRandomFloorTilesIndexes(minRandomTileRadius, maxRandomTileRadius));
             LiftLava(GetRandomFloorTilesIndexes(minRandomTileRadius, maxRandomTileRadius));
+            StartCoroutine(WaitOnArenaReadyCoroutine());
         }
     }
 }

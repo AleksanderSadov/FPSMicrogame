@@ -7,9 +7,6 @@ namespace Unity.FPS.Gameplay
 {
     public class EnemyWavesManager : MonoBehaviour
     {
-        [Tooltip("Delay before wave starts in seconds")]
-        public int waveStartDelayInSeconds = 1;
-
         [Tooltip("Spawn radius in units from the spawner location")]
         public int spawnRadius = 1;
 
@@ -37,24 +34,12 @@ namespace Unity.FPS.Gameplay
         void Start()
         {
             spawnDefaultPosition = transform.position;
-            EventManager.AddListener<WaveCompleteEvent>(OnWaveComplete);
-            StartNextWaveWithDelay(waveStartDelayInSeconds);
-        }
-
-        void StartNextWaveWithDelay(int delaySeconds)
-        {
-            currentWaveCount++;
-            StartCoroutine(CreateNextWaveWithDelayCoroutine(waveStartDelayInSeconds));
-        }
-
-        IEnumerator CreateNextWaveWithDelayCoroutine(int delaySeconds)
-        {
-            yield return new WaitForSeconds(delaySeconds);
-            CreateNextWave();
+            EventManager.AddListener<NavMeshReadyEvent>(OnWaveCompleteAndNavMeshReady);
         }
 
         private void CreateNextWave()
         {
+            currentWaveCount++;
             SpawnWaveEnemies();
             CreateKillWaveObjective();
         }
@@ -71,9 +56,9 @@ namespace Unity.FPS.Gameplay
             killWaveObject.GetComponent<ObjectiveKillWave>().WaveCount = currentWaveCount;
         }
 
-        private void OnWaveComplete(WaveCompleteEvent evt)
+        private void OnWaveCompleteAndNavMeshReady(NavMeshReadyEvent evt)
         {
-            StartNextWaveWithDelay(waveStartDelayInSeconds);
+            CreateNextWave();
         }
 
         private void MoveEnemyToRandomSpawnPosition(GameObject enemy)
