@@ -208,7 +208,7 @@ MonoBehaviour:
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
   AmmoReloadRate: 16
-  AmmoReloadDelay: 1
+  AmmoReloadDelay: 0.2
   MaxAmmo: 16
   AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 2
