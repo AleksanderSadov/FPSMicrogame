@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageMultiplier: 1
-  SensibilityToSelfdamage: 0.5
+  SensibilityToSelfdamage: 1
 --- !u!65 &9194442102086525668
 BoxCollider:
   m_ObjectHideFlags: 0
