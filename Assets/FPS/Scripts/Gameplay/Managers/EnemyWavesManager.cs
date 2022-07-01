@@ -18,6 +18,9 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Current turret enemies in wave. It will increase automaticaly as wave count increases")]
         public int waveTurretsCount = 0;
 
+        [Tooltip("Loot health pack chance from hoverbots")]
+        public float lootHealthPackChance = 0.1f;
+
         [Tooltip("Current wave count")]
         [SerializeField] private int waveCurrentCount = 0;
 
@@ -41,14 +44,17 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Loot jetpack prefab")]
         [SerializeField] private GameObject lootJetpack;
-        
+
+        [Tooltip("Loot health pack prefab")]
+        [SerializeField] private GameObject lootHealthPack;
+
         private Vector3 spawnDefaultPosition;
         private List<EnemySpawnQueueItem> enemySpawnQueue = new List<EnemySpawnQueueItem>();
 
         [System.Serializable]
         private class EnemySpawnQueueItem
         {
-            public EnemySpawnQueueItem(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, int lootChance)
+            public EnemySpawnQueueItem(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, float lootChance)
             {
                 this.enemyPrefab = enemyPrefab;
                 this.spawnCount = spawnCount;
@@ -64,7 +70,7 @@ namespace Unity.FPS.Gameplay
             public GameObject enemyPrefab;
             public int spawnCount;
             public GameObject lootPrefab;
-            public int lootChance;
+            public float lootChance;
         }
 
         // Start is called before the first frame update
@@ -99,7 +105,7 @@ namespace Unity.FPS.Gameplay
                     break;
             }
 
-            enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbot, waveHoverbotsCount));
+            enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbot, waveHoverbotsCount, lootHealthPack, lootHealthPackChance));
             enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyTurret, waveTurretsCount));
         }
 
@@ -113,7 +119,7 @@ namespace Unity.FPS.Gameplay
             }
         }
 
-        private void SpawnEnemy(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, int lootChance)
+        private void SpawnEnemy(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, float lootChance)
         {
             for (int i = 0; i < spawnCount; i++)
             {

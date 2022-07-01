@@ -20675,6 +20675,12 @@ PrefabInstance:
       objectReference: {fileID: 628909385}
     - target: {fileID: 7831405602225809106, guid: 03c6c55acf518ef4b89cc60d2feb4d64,
         type: 3}
+      propertyPath: lootHealthPack
+      value: 
+      objectReference: {fileID: 2529580269645609534, guid: 9973c412032becb4ca116ca08be62edf,
+        type: 3}
+    - target: {fileID: 7831405602225809106, guid: 03c6c55acf518ef4b89cc60d2feb4d64,
+        type: 3}
       propertyPath: objectivesParent
       value: 
       objectReference: {fileID: 159314370}
