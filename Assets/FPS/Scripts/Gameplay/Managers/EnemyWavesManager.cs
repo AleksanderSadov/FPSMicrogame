@@ -216,5 +216,10 @@ namespace Unity.FPS.Gameplay
             result = Vector3.zero;
             return false;
         }
+
+        void OnDestroy()
+        {
+            EventManager.RemoveListener<NavMeshReadyEvent>(OnWaveCompleteAndNavMeshReady);
+        }
     }
 }

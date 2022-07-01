@@ -29,5 +29,10 @@ namespace Unity.FPS.Game
             NavMeshReadyEvent navMeshReadyEvent = Events.NavMeshReadyEvent;
             EventManager.Broadcast(navMeshReadyEvent);
         }
+
+        void OnDestroy()
+        {
+            EventManager.RemoveListener<ArenaReadyEvent>(OnArenaReady);
+        }
     }
 }

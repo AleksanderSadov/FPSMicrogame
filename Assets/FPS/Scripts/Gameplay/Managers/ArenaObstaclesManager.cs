@@ -119,5 +119,10 @@ namespace Unity.FPS.Gameplay
             LiftLava(GetRandomFloorTilesIndexes(minRandomTileRadius, maxRandomTileRadius));
             StartCoroutine(WaitOnArenaReadyCoroutine());
         }
+
+        void OnDestroy()
+        {
+            EventManager.RemoveListener<WaveCompleteEvent>(OnWaveComplete);
+        }
     }
 }
