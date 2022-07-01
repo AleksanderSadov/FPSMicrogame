@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.FPS.AI;
 using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,8 +12,14 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Spawn radius in units from the spawner location")]
         public int spawnRadius = 1;
 
+        [Tooltip("Current hover bots enemies in wave. It will increase automaticaly as wave count increases")]
+        public int waveHoverbotsCount = 1;
+
+        [Tooltip("Current turret enemies in wave. It will increase automaticaly as wave count increases")]
+        public int waveTurretsCount = 0;
+
         [Tooltip("Current wave count")]
-        [SerializeField] private int currentWaveCount = 0;
+        [SerializeField] private int waveCurrentCount = 0;
 
         [Tooltip("Objectives parent container")]
         [SerializeField] private GameObject objectivesParent;
@@ -20,15 +28,44 @@ namespace Unity.FPS.Gameplay
         [SerializeField] private GameObject enemiesParent;
 
         [Tooltip("Kill wave objective prefab")]
-        [SerializeField] private GameObject killWaveObjective;
+        [SerializeField] private GameObject objectiveKillWave;
 
-        [Tooltip("Hoverbot enemy prefab")]
-        [SerializeField] private GameObject hoverBotEnemy;
+        [Tooltip("Hoverbot without loot enemy prefab")]
+        [SerializeField] private GameObject enemyHoverbot;
+
+        [Tooltip("Hoverbot with loot enemy prefab")]
+        [SerializeField] private GameObject enemyHoverbotWithLoot;
 
         [Tooltip("Turret enemy prefab")]
-        [SerializeField] private GameObject turretEnemy;
+        [SerializeField] private GameObject enemyTurret;
 
+        [Tooltip("Loot jetpack prefab")]
+        [SerializeField] private GameObject lootJetpack;
+        
         private Vector3 spawnDefaultPosition;
+        private List<EnemySpawnQueueItem> enemySpawnQueue = new List<EnemySpawnQueueItem>();
+
+        [System.Serializable]
+        private class EnemySpawnQueueItem
+        {
+            public EnemySpawnQueueItem(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, int lootChance)
+            {
+                this.enemyPrefab = enemyPrefab;
+                this.spawnCount = spawnCount;
+                this.lootPrefab = lootPrefab;
+                this.lootChance = lootChance;
+            }
+
+            public EnemySpawnQueueItem(GameObject enemyPrefab, int spawnCount) : this(enemyPrefab, spawnCount, null, 0)
+            {
+
+            }
+
+            public GameObject enemyPrefab;
+            public int spawnCount;
+            public GameObject lootPrefab;
+            public int lootChance;
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -39,21 +76,63 @@ namespace Unity.FPS.Gameplay
 
         private void CreateNextWave()
         {
-            currentWaveCount++;
+            waveCurrentCount++;
+            HandleDifficulty();
             SpawnWaveEnemies();
             CreateKillWaveObjective();
         }
 
+        private void HandleDifficulty()
+        {
+            switch (waveCurrentCount)
+            {
+                case 3:
+                    waveHoverbotsCount++;
+                    break;
+                case 5:
+                    enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootJetpack, 1));
+                    break;
+                case 6:
+                    waveHoverbotsCount++;
+                    break;
+                default:
+                    break;
+            }
+
+            enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbot, waveHoverbotsCount));
+            enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyTurret, waveTurretsCount));
+        }
+
         private void SpawnWaveEnemies()
         {
-            GameObject enemy = Instantiate(hoverBotEnemy, spawnDefaultPosition, hoverBotEnemy.transform.rotation, enemiesParent.transform);
-            MoveEnemyToRandomSpawnPosition(enemy);
+            for (int i = enemySpawnQueue.Count - 1; i >= 0; i--)
+            {
+                EnemySpawnQueueItem enemyQueueItem = enemySpawnQueue[i];
+                SpawnEnemy(enemyQueueItem.enemyPrefab, enemyQueueItem.spawnCount, enemyQueueItem.lootPrefab, enemyQueueItem.lootChance);
+                enemySpawnQueue.RemoveAt(i);
+            }
+        }
+
+        private void SpawnEnemy(GameObject enemyPrefab, int spawnCount, GameObject lootPrefab, int lootChance)
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject enemy = Instantiate(enemyPrefab, spawnDefaultPosition, enemyPrefab.transform.rotation, enemiesParent.transform);
+                MoveEnemyToRandomSpawnPosition(enemy);
+
+                if (lootPrefab != null)
+                {
+                    EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                    enemyController.LootPrefab = lootPrefab;
+                    enemyController.DropRate = lootChance;
+                }
+            }
         }
 
         private void CreateKillWaveObjective()
         {
-            GameObject killWaveObject = Instantiate(killWaveObjective, objectivesParent.transform);
-            killWaveObject.GetComponent<ObjectiveKillWave>().WaveCount = currentWaveCount;
+            GameObject killWaveObject = Instantiate(objectiveKillWave, objectivesParent.transform);
+            killWaveObject.GetComponent<ObjectiveKillWave>().WaveCount = waveCurrentCount;
         }
 
         private void OnWaveCompleteAndNavMeshReady(NavMeshReadyEvent evt)

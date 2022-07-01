@@ -44,14 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1a9cc7f59b993458088beac26362c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveStartDelayInSeconds: 3
-  spawnRadius: 30
-  currentWaveCount: 0
+  spawnRadius: 32
+  waveHoverbotsCount: 1
+  waveTurretsCount: 0
+  waveCurrentCount: 0
   objectivesParent: {fileID: 0}
   enemiesParent: {fileID: 0}
-  killWaveObjective: {fileID: 1230498008701396792, guid: a50db6dad94fd954b88c91bb79f77643,
+  objectiveKillWave: {fileID: 1230498008701396792, guid: a50db6dad94fd954b88c91bb79f77643,
     type: 3}
-  hoverBotEnemy: {fileID: 2015434656898269652, guid: 25a1b0efadb966e44889fce712c8ff8d,
+  enemyHoverbot: {fileID: 2015434656898269652, guid: 25a1b0efadb966e44889fce712c8ff8d,
     type: 3}
-  turretEnemy: {fileID: 2015434656898269652, guid: e29d43f43cc5d82499dd9926e01847d3,
+  enemyHoverbotWithLoot: {fileID: 7296742856028835559, guid: ed110acb703c6244f97aa2822d8105bd,
+    type: 3}
+  enemyTurret: {fileID: 2015434656898269652, guid: e29d43f43cc5d82499dd9926e01847d3,
+    type: 3}
+  lootJetpack: {fileID: 2620131183356007192, guid: 0bb4e7bdf1aec0247854edd179ed1557,
     type: 3}
