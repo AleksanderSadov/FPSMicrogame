@@ -57,7 +57,11 @@ namespace Unity.FPS.Gameplay
         [Tooltip("How fast the weapon goes back to it's original position after the recoil is finished")]
         public float RecoilRestitutionSharpness = 10f;
 
-        [Header("Misc")] [Tooltip("Speed at which the aiming animatoin is played")]
+        [Header("Misc")]
+        [Tooltip("Auto switching to new weapon on pickup")]
+        public bool WeaponAutoSwitchOnPickup = false;
+
+        [Tooltip("Speed at which the aiming animatoin is played")]
         public float AimingAnimationSpeed = 10f;
 
         [Tooltip("Field of view when not aiming")]
@@ -524,6 +528,28 @@ namespace Unity.FPS.Gameplay
 
             // if we didn't find a valid active weapon in our weapon slots, return null
             return null;
+        }
+
+        public int GetLastSlottedWeaponIndex()
+        {
+            for (int i = m_WeaponSlots.Length - 1; i >= 0; i--)
+            {
+                if (m_WeaponSlots[i] != null)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public void SwitchToLastSlottedWeapon()
+        {
+            int weaponIndex = GetLastSlottedWeaponIndex();
+            if (weaponIndex >= 0)
+            {
+                SwitchToWeaponIndex(weaponIndex);
+            }
         }
 
         // Calculates the "distance" between two weapon slot indexes

@@ -19,6 +19,9 @@ namespace Unity.FPS.UI
         [Tooltip("Slider component for look sensitivity")]
         public Slider LookSensitivitySlider;
 
+        [Tooltip("Toggle auto switching to new weapon on pickup")]
+        public Toggle weaponAutoSwitchOnPickupToggle;
+
         [Tooltip("Toggle component for shadows")]
         public Toggle ShadowsToggle;
 
@@ -32,6 +35,7 @@ namespace Unity.FPS.UI
         public GameObject ControlImage;
 
         PlayerInputHandler m_PlayerInputsHandler;
+        PlayerWeaponsManager m_PlayerWeaponsManager;
         Health m_PlayerHealth;
         FramerateCounter m_FramerateCounter;
 
@@ -39,6 +43,10 @@ namespace Unity.FPS.UI
         {
             m_PlayerInputsHandler = FindObjectOfType<PlayerInputHandler>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerInputHandler, InGameMenuManager>(m_PlayerInputsHandler,
+                this);
+
+            m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, InGameMenuManager>(m_PlayerWeaponsManager,
                 this);
 
             m_PlayerHealth = m_PlayerInputsHandler.GetComponent<Health>();
@@ -51,6 +59,9 @@ namespace Unity.FPS.UI
 
             LookSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
             LookSensitivitySlider.value = DataPersistenceManager.Instance.currentSettings.lookSensitivity;
+
+            weaponAutoSwitchOnPickupToggle.onValueChanged.AddListener(OnWeaponAutoSwitchOnPickupChanged);
+            weaponAutoSwitchOnPickupToggle.isOn = DataPersistenceManager.Instance.currentSettings.weaponAutoSwitchOnPickup;
 
             ShadowsToggle.onValueChanged.AddListener(OnShadowsChanged);
             ShadowsToggle.isOn = DataPersistenceManager.Instance.currentSettings.enableShadows;
@@ -135,6 +146,7 @@ namespace Unity.FPS.UI
             DataPersistenceManager.SettingsSaveData settingsSaveData = new DataPersistenceManager.SettingsSaveData();
 
             settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
+            settingsSaveData.weaponAutoSwitchOnPickup = weaponAutoSwitchOnPickupToggle.isOn;
             settingsSaveData.enableShadows = ShadowsToggle.isOn;
             settingsSaveData.isInvincible = InvincibilityToggle.isOn;
             settingsSaveData.showFramerate = FramerateToggle.isOn;
@@ -145,6 +157,11 @@ namespace Unity.FPS.UI
         void OnMouseSensitivityChanged(float newValue)
         {
             m_PlayerInputsHandler.LookSensitivity = newValue;
+        }
+
+        void OnWeaponAutoSwitchOnPickupChanged(bool newValue)
+        {
+            m_PlayerWeaponsManager.WeaponAutoSwitchOnPickup = newValue;
         }
 
         void OnShadowsChanged(bool newValue)

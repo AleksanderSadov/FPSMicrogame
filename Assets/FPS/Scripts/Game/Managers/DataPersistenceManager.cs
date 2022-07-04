@@ -34,6 +34,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         [Range(0.05f, 3f)]
         public float lookSensitivity;
+        public bool weaponAutoSwitchOnPickup;
         public bool enableShadows;
         public bool isInvincible;
         public bool showFramerate;

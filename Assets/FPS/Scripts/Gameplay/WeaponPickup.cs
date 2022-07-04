@@ -30,7 +30,11 @@ namespace Unity.FPS.Gameplay
                     // Handle auto-switching to weapon if no weapons currently
                     if (playerWeaponsManager.GetActiveWeapon() == null)
                     {
-                        playerWeaponsManager.SwitchWeapon(true);
+                        playerWeaponsManager.SwitchWeapon(false);
+                    }
+                    else if (playerWeaponsManager.WeaponAutoSwitchOnPickup)
+                    {
+                        playerWeaponsManager.SwitchToLastSlottedWeapon();
                     }
 
                     PlayPickupFeedback();
