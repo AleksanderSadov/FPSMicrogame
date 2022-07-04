@@ -104,19 +104,19 @@ namespace Unity.FPS.Gameplay
                 case 1:
                     waveHoverbotsCount = 1;
                     break;
-                case 3:
+                case 2:
                     waveHoverbotsCount = 2;
                     break;
-                case 5:
+                case 3:
                     enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootShotgun, 1));
                     break;
-                case 6:
+                case 4:
                     waveHoverbotsCount = 3;
                     break;
-                case 7:
+                case 6:
                     enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbotWithLoot, 1, lootJetpack, 1));
                     break;
-                case 8:
+                case 7:
                     waveHoverbotsCount = 4;
                     break;
                 case 9:
