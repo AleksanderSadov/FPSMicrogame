@@ -47,8 +47,8 @@ namespace Unity.FPS.UI
 
             MenuRoot.SetActive(false);
 
-            LookSensitivitySlider.value = m_PlayerInputsHandler.LookSensitivity;
             LookSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
+            LookSensitivitySlider.value = DataPersistenceManager.Instance.currentSettings.lookSensitivity;
 
             ShadowsToggle.isOn = QualitySettings.shadows != ShadowQuality.Disable;
             ShadowsToggle.onValueChanged.AddListener(OnShadowsChanged);
@@ -122,8 +122,17 @@ namespace Unity.FPS.UI
                 Cursor.visible = false;
                 Time.timeScale = 1f;
                 AudioUtility.SetMasterVolume(1);
+
+                SaveSettings();
             }
 
+        }
+
+       private void SaveSettings()
+        {
+            DataPersistenceManager.SettingsSaveData settingsSaveData = new DataPersistenceManager.SettingsSaveData();
+            settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
+            DataPersistenceManager.Instance.SaveSettings(settingsSaveData);
         }
 
         void OnMouseSensitivityChanged(float newValue)
