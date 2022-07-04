@@ -75,6 +75,10 @@ namespace Unity.FPS.AI
         [Tooltip("The chance the object has to drop")] [Range(0, 1)]
         public float DropRate = 1f;
 
+        [Header("Score")]
+        [Tooltip("Add to player score on this enemy death")]
+        public int score;
+
         [Header("Debug Display")] [Tooltip("Color of the sphere gizmo representing the path reaching range")]
         public Color PathReachingRangeColor = Color.yellow;
 
@@ -111,6 +115,7 @@ namespace Unity.FPS.AI
         Actor m_Actor;
         Collider[] m_SelfColliders;
         GameFlowManager m_GameFlowManager;
+        HighscoreManager m_HighscoreManager;
         bool m_WasDamagedThisFrame;
         float m_LastTimeWeaponSwapped = Mathf.NegativeInfinity;
         int m_CurrentWeaponIndex;
@@ -139,6 +144,10 @@ namespace Unity.FPS.AI
 
             m_GameFlowManager = FindObjectOfType<GameFlowManager>();
             DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, EnemyController>(m_GameFlowManager, this);
+
+            m_HighscoreManager = GameObject.FindObjectOfType<HighscoreManager>();
+            DebugUtility.HandleErrorIfNullFindObject<HighscoreManager, EnemyController>(
+                    m_HighscoreManager, this);
 
             // Subscribe to damage & death actions
             m_Health.OnDie += OnDie;
@@ -371,6 +380,8 @@ namespace Unity.FPS.AI
             {
                 Instantiate(LootPrefab, transform.position, Quaternion.identity);
             }
+
+            m_HighscoreManager.IncreaseCurrentScore(score);
 
             // this will call the OnDestroy function
             Destroy(gameObject, DeathDuration);

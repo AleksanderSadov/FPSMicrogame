@@ -3,70 +3,73 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class DataPersistenceManager : MonoBehaviour
+namespace Unity.FPS.Game
 {
-    public const string SAVE_SETTINGS_FILENAME = "saveSettings.json";
-
-    public static DataPersistenceManager Instance;
-
-    public SettingsSaveData defaultSettings;
-    public SettingsSaveData currentSettings;
-
-    private string settingsPath;
-
-    public void Awake()
+    public class DataPersistenceManager : MonoBehaviour
     {
-        if (Instance != null)
+        public const string SAVE_SETTINGS_FILENAME = "saveSettings.json";
+
+        public static DataPersistenceManager Instance;
+
+        public SettingsSaveData defaultSettings;
+        public SettingsSaveData currentSettings;
+
+        private string settingsPath;
+
+        public void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            settingsPath = Application.persistentDataPath + SAVE_SETTINGS_FILENAME;
+            LoadSettings();
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        settingsPath = Application.persistentDataPath + SAVE_SETTINGS_FILENAME;
-        LoadSettings();
-    }
-
-    [System.Serializable]
-    public class SettingsSaveData
-    {
-        [Range(0.05f, 3f)]
-        public float lookSensitivity;
-        public bool weaponAutoSwitchOnPickup;
-        public bool enableShadows;
-        public bool isInvincible;
-        public bool showFramerate;
-    }
-
-    public void SaveSettings(SettingsSaveData newSettings)
-    {
-        currentSettings = newSettings;
-        string json = JsonUtility.ToJson(newSettings);
-        File.WriteAllText(settingsPath, json);
-    }
-
-    public void LoadSettings()
-    {
-        if (File.Exists(settingsPath))
+        [System.Serializable]
+        public class SettingsSaveData
         {
-            string json = File.ReadAllText(settingsPath);
-            SettingsSaveData loadedSettings = JsonUtility.FromJson<SettingsSaveData>(json);
-            currentSettings = loadedSettings;
+            [Range(0.05f, 3f)]
+            public float lookSensitivity;
+            public bool weaponAutoSwitchOnPickup;
+            public bool enableShadows;
+            public bool isInvincible;
+            public bool showFramerate;
         }
-        else
-        {
-            currentSettings = defaultSettings;
-        }
-    }
 
-    public void DeleteSettings()
-    {
-        string path = Application.persistentDataPath + SAVE_SETTINGS_FILENAME;
-        if (File.Exists(settingsPath))
+        public void SaveSettings(SettingsSaveData newSettings)
         {
-            File.Delete(settingsPath);
+            currentSettings = newSettings;
+            string json = JsonUtility.ToJson(newSettings);
+            File.WriteAllText(settingsPath, json);
+        }
+
+        public void LoadSettings()
+        {
+            if (File.Exists(settingsPath))
+            {
+                string json = File.ReadAllText(settingsPath);
+                SettingsSaveData loadedSettings = JsonUtility.FromJson<SettingsSaveData>(json);
+                currentSettings = loadedSettings;
+            }
+            else
+            {
+                currentSettings = defaultSettings;
+            }
+        }
+
+        public void DeleteSettings()
+        {
+            string path = Application.persistentDataPath + SAVE_SETTINGS_FILENAME;
+            if (File.Exists(settingsPath))
+            {
+                File.Delete(settingsPath);
+            }
         }
     }
 }

@@ -265,6 +265,7 @@ MonoBehaviour:
   DeathVfxSpawnPoint: {fileID: 7886326314632062837}
   LootPrefab: {fileID: 0}
   DropRate: 1
+  score: 200
   PathReachingRangeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   AttackRangeColor: {r: 1, g: 0, b: 0, a: 1}
   DetectionRangeColor: {r: 0, g: 0, b: 1, a: 1}

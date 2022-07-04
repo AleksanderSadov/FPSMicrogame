@@ -1,4 +1,5 @@
-﻿using Unity.FPS.Game;
+﻿using System;
+using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -122,6 +123,7 @@ namespace Unity.FPS.Gameplay
         CharacterController m_Controller;
         PlayerWeaponsManager m_WeaponsManager;
         Actor m_Actor;
+        HighscoreManager m_HighscoreManager;
         Vector3 m_GroundNormal;
         Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
@@ -161,9 +163,15 @@ namespace Unity.FPS.Gameplay
             m_Actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
 
+            m_HighscoreManager = GameObject.FindObjectOfType<HighscoreManager>();
+            DebugUtility.HandleErrorIfNullFindObject<HighscoreManager, PlayerCharacterController>(
+                    m_HighscoreManager, this);
+
             m_Controller.enableOverlapRecovery = true;
 
             m_Health.OnDie += OnDie;
+
+            m_Health.OnDamaged += OnDamaged;
 
             // force the crouch state to false when starting
             SetCrouchingState(false, true);
@@ -226,6 +234,12 @@ namespace Unity.FPS.Gameplay
             m_WeaponsManager.SwitchToWeaponIndex(-1, true);
 
             EventManager.Broadcast(Events.PlayerDeathEvent);
+        }
+
+        void OnDamaged(float dmg, GameObject source)
+        {
+            bool useDamageScoreMultiplier = true;
+            m_HighscoreManager.DecreaseCurrentScore(dmg, useDamageScoreMultiplier);
         }
 
         void GroundCheck()
