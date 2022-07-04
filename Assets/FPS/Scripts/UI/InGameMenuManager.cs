@@ -2,6 +2,8 @@
 using Unity.FPS.Gameplay;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace Unity.FPS.UI
@@ -50,8 +52,8 @@ namespace Unity.FPS.UI
             LookSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
             LookSensitivitySlider.value = DataPersistenceManager.Instance.currentSettings.lookSensitivity;
 
-            ShadowsToggle.isOn = QualitySettings.shadows != ShadowQuality.Disable;
             ShadowsToggle.onValueChanged.AddListener(OnShadowsChanged);
+            ShadowsToggle.isOn = DataPersistenceManager.Instance.currentSettings.enableShadows;
 
             InvincibilityToggle.isOn = m_PlayerHealth.Invincible;
             InvincibilityToggle.onValueChanged.AddListener(OnInvincibilityChanged);
@@ -132,6 +134,7 @@ namespace Unity.FPS.UI
         {
             DataPersistenceManager.SettingsSaveData settingsSaveData = new DataPersistenceManager.SettingsSaveData();
             settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
+            settingsSaveData.enableShadows = ShadowsToggle.isOn;
             DataPersistenceManager.Instance.SaveSettings(settingsSaveData);
         }
 
@@ -142,7 +145,16 @@ namespace Unity.FPS.UI
 
         void OnShadowsChanged(bool newValue)
         {
-            QualitySettings.shadows = newValue ? ShadowQuality.All : ShadowQuality.Disable;
+            UniversalRenderPipelineAsset urpAsset = (UniversalRenderPipelineAsset) GraphicsSettings.renderPipelineAsset;
+            
+            if (newValue)
+            {
+                urpAsset.shadowDistance = 50;
+            }
+            else
+            {
+                urpAsset.shadowDistance = 0;
+            }
         }
 
         void OnInvincibilityChanged(bool newValue)

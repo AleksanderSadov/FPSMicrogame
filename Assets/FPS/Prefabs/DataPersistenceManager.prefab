@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSettings:
     lookSensitivity: 1
+    enableShadows: 1
   currentSettings:
     lookSensitivity: 0
+    enableShadows: 0
