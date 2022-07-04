@@ -48,7 +48,9 @@ MonoBehaviour:
     lookSensitivity: 1
     enableShadows: 1
     isInvincible: 0
+    showFramerate: 0
   currentSettings:
     lookSensitivity: 0
     enableShadows: 0
     isInvincible: 0
+    showFramerate: 0

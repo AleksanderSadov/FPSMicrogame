@@ -36,6 +36,7 @@ public class DataPersistenceManager : MonoBehaviour
         public float lookSensitivity;
         public bool enableShadows;
         public bool isInvincible;
+        public bool showFramerate;
     }
 
     public void SaveSettings(SettingsSaveData newSettings)

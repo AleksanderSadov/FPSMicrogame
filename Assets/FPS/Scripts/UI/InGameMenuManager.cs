@@ -58,8 +58,8 @@ namespace Unity.FPS.UI
             InvincibilityToggle.onValueChanged.AddListener(OnInvincibilityChanged);
             InvincibilityToggle.isOn = DataPersistenceManager.Instance.currentSettings.isInvincible;
 
-            FramerateToggle.isOn = m_FramerateCounter.UIText.gameObject.activeSelf;
             FramerateToggle.onValueChanged.AddListener(OnFramerateCounterChanged);
+            FramerateToggle.isOn = DataPersistenceManager.Instance.currentSettings.showFramerate;
         }
 
         void Update()
@@ -137,6 +137,7 @@ namespace Unity.FPS.UI
             settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
             settingsSaveData.enableShadows = ShadowsToggle.isOn;
             settingsSaveData.isInvincible = InvincibilityToggle.isOn;
+            settingsSaveData.showFramerate = FramerateToggle.isOn;
 
             DataPersistenceManager.Instance.SaveSettings(settingsSaveData);
         }
