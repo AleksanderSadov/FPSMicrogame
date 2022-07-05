@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142fcb7b7caac774e888b01872b6cbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nickname: {fileID: 0}
+  nicknameInput: {fileID: 0}
   submitButton: {fileID: 0}
+  scoreText: {fileID: 0}
   score: 34
   leaderboardID: 4576
   leadersListParent: {fileID: 0}
   leadersListItem: {fileID: 415966976645647728, guid: f8fbf1bdcd0d3a0499c26a02c336ae0a,
     type: 3}
+  isScoreSubmitted: 0

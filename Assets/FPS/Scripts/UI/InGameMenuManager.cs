@@ -143,7 +143,7 @@ namespace Unity.FPS.UI
 
        private void SaveSettings()
         {
-            DataPersistenceManager.SettingsSaveData settingsSaveData = new DataPersistenceManager.SettingsSaveData();
+            DataPersistenceManager.SettingsSaveData settingsSaveData = DataPersistenceManager.Instance.currentSettings;
 
             settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
             settingsSaveData.weaponAutoSwitchOnPickup = weaponAutoSwitchOnPickupToggle.isOn;

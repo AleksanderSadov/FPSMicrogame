@@ -12,6 +12,11 @@ namespace Unity.FPS.Game
 
         [SerializeField] private float currentScore = 0;
 
+        private void Start()
+        {
+            EventManager.AddListener<PlayerDeathEvent>(OnPlayerDeath);
+        }
+
         public int GetCurrentScore()
         {
             return (int) Math.Round(currentScore);
@@ -32,6 +37,16 @@ namespace Unity.FPS.Game
             {
                 currentScore -= decrease;
             }
+        }
+
+        private void OnPlayerDeath(PlayerDeathEvent evt)
+        {
+            DataPersistenceManager.Instance.playerScore = GetCurrentScore();
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.RemoveListener<PlayerDeathEvent>(OnPlayerDeath);
         }
     }
 }

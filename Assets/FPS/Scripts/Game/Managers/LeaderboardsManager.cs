@@ -2,112 +2,144 @@ using UnityEngine;
 using LootLocker.Requests;
 using TMPro;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
-public class LeaderboardsManager : MonoBehaviour
+namespace Unity.FPS.Game
 {
-    [SerializeField] private TMP_InputField nickname;
-    [SerializeField] private Button submitButton;
-    [SerializeField] private int score;
-    [SerializeField] private int leaderboardID;
-    [SerializeField] private GameObject leadersListParent;
-    [SerializeField] private GameObject leadersListItem;
-    [SerializeField] private bool isScoreSubmitted = false;
-
-    private void Start()
+    public class LeaderboardsManager : MonoBehaviour
     {
-        LootLockerSDKManager.StartGuestSession((response) =>
-        {
-            if (!response.success)
-            {
-                return;
-            }
-        });
-    }
+        [SerializeField] private TMP_InputField nicknameInput;
+        [SerializeField] private Button submitButton;
+        [SerializeField] private TMP_Text scoreText;
+        [SerializeField] private int score;
+        [SerializeField] private int leaderboardID;
+        [SerializeField] private GameObject leadersListParent;
+        [SerializeField] private GameObject leadersListItem;
+        [SerializeField] private bool isScoreSubmitted = false;
 
-    private void Update()
-    {
-        if (string.IsNullOrEmpty(nickname.text) || isScoreSubmitted)
+        private void Start()
         {
-            submitButton.interactable = false;
+            InitPlayerData();
+            formatNicknameInput();
+            LootLockerStartGuestSession();
         }
-        else
-        {
-            submitButton.interactable = true;
-        }
-    }
 
-    public void SubmitScore()
-    {
-        LootLockerSDKManager.SubmitScore(nickname.text, score, leaderboardID, (response) =>
+        private void Update()
         {
-            if (response.success)
+            if (string.IsNullOrEmpty(nicknameInput.text) || isScoreSubmitted)
             {
-                isScoreSubmitted = true;
-                GetSurroundingScore(nickname.text);
+                submitButton.interactable = false;
             }
             else
             {
-
+                submitButton.interactable = true;
             }
-        });
-    }
+        }
 
-    public void GetSurroundingScore(string memberID)
-    {
-        LootLockerSDKManager.GetMemberRank(leaderboardID, memberID, (responseMemberRank) =>
+        public void SubmitScore()
         {
-            if (responseMemberRank.success)
+            LootLockerSDKManager.SubmitScore(nicknameInput.text, score, leaderboardID, (response) =>
             {
-                int memberRank = responseMemberRank.rank;
-                int count = 5;
-                int after = memberRank < 3 ? 0 : memberRank - 3;
-
-                LootLockerSDKManager.GetScoreList(leaderboardID, count, after, (responseScoreList) =>
+                if (response.success)
                 {
-                    if (responseScoreList.success)
-                    {
-                        if (leadersListParent.transform.childCount > 0)
-                        {
-                            foreach (Transform child in leadersListParent.transform)
-                            {
-                                GameObject.Destroy(child.gameObject);
-                            }
-                        }
+                    isScoreSubmitted = true;
+                    SaveUsedNickname();
+                    GetSurroundingScore(nicknameInput.text);
+                }
+            });
+        }
 
-                        for (int i = 0; i < responseScoreList.items.Length; i++)
-                        {
-                            var scoreItem = responseScoreList.items[i];
-
-                            GameObject listItem = Instantiate(leadersListItem, leadersListParent.transform);
-                            listItem.transform.localPosition = new Vector3(0, i * -50, 0);
-
-                            TMP_Text rankText = listItem.transform.GetChild(0).GetComponent<TMP_Text>();
-                            rankText.text = "#" + scoreItem.rank;
-
-                            TMP_Text nicknameText = listItem.transform.GetChild(1).GetComponent<TMP_Text>();
-                            nicknameText.text = scoreItem.member_id;
-
-                            TMP_Text scoreText = listItem.transform.GetChild(2).GetComponent<TMP_Text>();
-                            scoreText.text = scoreItem.score.ToString();
-
-                            if (scoreItem.rank == memberRank)
-                            {
-                                rankText.fontStyle      = FontStyles.Bold | FontStyles.Underline;
-                                nicknameText.fontStyle  = FontStyles.Bold | FontStyles.Underline;
-                                scoreText.fontStyle     = FontStyles.Bold | FontStyles.Underline;
-                            }
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                });
-            }
-            else
+        public void GetSurroundingScore(string memberID)
+        {
+            LootLockerSDKManager.GetMemberRank(leaderboardID, memberID, (responseMemberRank) =>
             {
+                if (responseMemberRank.success)
+                {
+                    int memberRank = responseMemberRank.rank;
+                    int count = 5;
+                    int after = memberRank < 3 ? 0 : memberRank - 3;
 
+                    LootLockerSDKManager.GetScoreList(leaderboardID, count, after, (responseScoreList) =>
+                    {
+                        if (responseScoreList.success)
+                        {
+                            if (leadersListParent.transform.childCount > 0)
+                            {
+                                foreach (Transform child in leadersListParent.transform)
+                                {
+                                    GameObject.Destroy(child.gameObject);
+                                }
+                            }
+
+                            for (int i = 0; i < responseScoreList.items.Length; i++)
+                            {
+                                var scoreItem = responseScoreList.items[i];
+
+                                GameObject listItem = Instantiate(leadersListItem, leadersListParent.transform);
+                                listItem.transform.localPosition = new Vector3(0, i * -50, 0);
+
+                                TMP_Text rankText = listItem.transform.GetChild(0).GetComponent<TMP_Text>();
+                                rankText.text = "#" + scoreItem.rank;
+
+                                TMP_Text nicknameText = listItem.transform.GetChild(1).GetComponent<TMP_Text>();
+                                nicknameText.text = scoreItem.member_id;
+
+                                TMP_Text scoreText = listItem.transform.GetChild(2).GetComponent<TMP_Text>();
+                                scoreText.text = scoreItem.score.ToString();
+
+                                if (scoreItem.rank == memberRank)
+                                {
+                                    rankText.fontStyle = FontStyles.Bold | FontStyles.Underline;
+                                    nicknameText.fontStyle = FontStyles.Bold | FontStyles.Underline;
+                                    scoreText.fontStyle = FontStyles.Bold | FontStyles.Underline;
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        private void InitPlayerData()
+        {
+            score = DataPersistenceManager.Instance.playerScore;
+            scoreText.text = score.ToString();
+
+            string lastUsedNickname = DataPersistenceManager.Instance.currentSettings.playerLastUsedNickname;
+            if (!string.IsNullOrEmpty(lastUsedNickname))
+            {
+                nicknameInput.text = lastUsedNickname;
             }
-        });
+        }
+
+        private void formatNicknameInput()
+        {
+            nicknameInput.onValueChanged.AddListener((text) =>
+            {
+                Regex rgx = new Regex("[^a-zA-Z0-9]");
+                string formattedText = rgx.Replace(text, "");
+                nicknameInput.text = formattedText;
+            });
+        }
+
+        private void LootLockerStartGuestSession()
+        {
+            LootLockerSDKManager.StartGuestSession((response) =>
+            {
+                if (!response.success)
+                {
+                    return;
+                }
+            });
+        }
+
+        private void SaveUsedNickname()
+        {
+            DataPersistenceManager dataManager = DataPersistenceManager.Instance;
+            DataPersistenceManager.SettingsSaveData settings = dataManager.currentSettings;
+
+            settings.playerLastUsedNickname = nicknameInput.text;
+            dataManager.SaveSettings(settings);
+        }
     }
 }

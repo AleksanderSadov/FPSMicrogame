@@ -13,6 +13,7 @@ namespace Unity.FPS.Game
 
         public SettingsSaveData defaultSettings;
         public SettingsSaveData currentSettings;
+        public int playerScore;
 
         private string settingsPath;
 
@@ -40,6 +41,7 @@ namespace Unity.FPS.Game
             public bool enableShadows;
             public bool isInvincible;
             public bool showFramerate;
+            public string playerLastUsedNickname;
         }
 
         public void SaveSettings(SettingsSaveData newSettings)
