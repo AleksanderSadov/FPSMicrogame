@@ -12,7 +12,7 @@ namespace Unity.FPS.Game
         [SerializeField] private Button submitButton;
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private int score;
-        [SerializeField] private int leaderboardID;
+        [SerializeField] private string leaderboardKey;
         [SerializeField] private GameObject leadersListParent;
         [SerializeField] private GameObject leadersListItem;
         [SerializeField] private bool isScoreSubmitted = false;
@@ -38,7 +38,7 @@ namespace Unity.FPS.Game
 
         public void SubmitScore()
         {
-            LootLockerSDKManager.SubmitScore(nicknameInput.text, score, leaderboardID, (response) =>
+            LootLockerSDKManager.SubmitScore(nicknameInput.text, score, leaderboardKey, (response) =>
             {
                 if (response.success)
                 {
@@ -51,7 +51,7 @@ namespace Unity.FPS.Game
 
         public void GetSurroundingScore(string memberID)
         {
-            LootLockerSDKManager.GetMemberRank(leaderboardID, memberID, (responseMemberRank) =>
+            LootLockerSDKManager.GetMemberRank(leaderboardKey, memberID, (responseMemberRank) =>
             {
                 if (responseMemberRank.success)
                 {
@@ -59,7 +59,7 @@ namespace Unity.FPS.Game
                     int count = 5;
                     int after = memberRank < 3 ? 0 : memberRank - 3;
 
-                    LootLockerSDKManager.GetScoreList(leaderboardID, count, after, (responseScoreList) =>
+                    LootLockerSDKManager.GetScoreList(leaderboardKey, count, after, (responseScoreList) =>
                     {
                         if (responseScoreList.success)
                         {

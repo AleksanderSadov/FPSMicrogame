@@ -48,7 +48,7 @@ MonoBehaviour:
   submitButton: {fileID: 0}
   scoreText: {fileID: 0}
   score: 34
-  leaderboardID: 4576
+  leaderboardKey: LavaArenaLeaderboard
   leadersListParent: {fileID: 0}
   leadersListItem: {fileID: 415966976645647728, guid: f8fbf1bdcd0d3a0499c26a02c336ae0a,
     type: 3}
