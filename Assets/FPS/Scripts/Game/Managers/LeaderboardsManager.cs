@@ -16,6 +16,7 @@ namespace Unity.FPS.Game
         [SerializeField] private GameObject leadersListParent;
         [SerializeField] private GameObject leadersListItem;
         [SerializeField] private bool isScoreSubmitted = false;
+        [SerializeField] private bool isSessionStarted = false;
 
         private void Start()
         {
@@ -26,7 +27,7 @@ namespace Unity.FPS.Game
 
         private void Update()
         {
-            if (string.IsNullOrEmpty(nicknameInput.text) || isScoreSubmitted)
+            if (string.IsNullOrEmpty(nicknameInput.text) || isScoreSubmitted || !isSessionStarted)
             {
                 submitButton.interactable = false;
             }
@@ -130,6 +131,8 @@ namespace Unity.FPS.Game
                 {
                     return;
                 }
+
+                isSessionStarted = true;
             });
         }
 
