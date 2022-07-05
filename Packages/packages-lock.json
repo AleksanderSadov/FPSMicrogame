@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "com.lootlocker.lootlockersdk": {
-      "version": "file:C:/Users/aleks/Downloads/unity-sdk-1.1.32/unity-sdk-1.1.32",
+      "version": "https://github.com/LootLocker/unity-sdk.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
-      }
+      },
+      "hash": "14977a817f1703f15e55dd790947e7eec8e8d35f"
     },
     "com.unity.burst": {
       "version": "1.6.5",
