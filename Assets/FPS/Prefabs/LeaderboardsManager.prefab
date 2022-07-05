@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: {fileID: 0}
+  submitButton: {fileID: 0}
   score: 34
   leaderboardID: 4576
   leadersListParent: {fileID: 0}

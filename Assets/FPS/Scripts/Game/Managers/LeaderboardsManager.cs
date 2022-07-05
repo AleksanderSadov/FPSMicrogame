@@ -1,14 +1,17 @@
 using UnityEngine;
 using LootLocker.Requests;
 using TMPro;
+using UnityEngine.UI;
 
 public class LeaderboardsManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField nickname;
+    [SerializeField] private Button submitButton;
     [SerializeField] private int score;
     [SerializeField] private int leaderboardID;
     [SerializeField] private GameObject leadersListParent;
     [SerializeField] private GameObject leadersListItem;
+    [SerializeField] private bool isScoreSubmitted = false;
 
     private void Start()
     {
@@ -21,13 +24,25 @@ public class LeaderboardsManager : MonoBehaviour
         });
     }
 
+    private void Update()
+    {
+        if (string.IsNullOrEmpty(nickname.text) || isScoreSubmitted)
+        {
+            submitButton.interactable = false;
+        }
+        else
+        {
+            submitButton.interactable = true;
+        }
+    }
+
     public void SubmitScore()
     {
         LootLockerSDKManager.SubmitScore(nickname.text, score, leaderboardID, (response) =>
         {
             if (response.success)
             {
-
+                isScoreSubmitted = true;
                 GetSurroundingScore(nickname.text);
             }
             else
