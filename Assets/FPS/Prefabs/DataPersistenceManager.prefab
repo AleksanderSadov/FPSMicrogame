@@ -46,13 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSettings:
     lookSensitivity: 1
+    musicVolume: 0.5
     weaponAutoSwitchOnPickup: 1
     enableShadows: 1
     isInvincible: 0
     showFramerate: 0
+    playerLastUsedNickname: 
   currentSettings:
     lookSensitivity: 0
+    musicVolume: 0
     weaponAutoSwitchOnPickup: 0
     enableShadows: 0
     isInvincible: 0
     showFramerate: 0
+    playerLastUsedNickname: 
+  playerScore: 0

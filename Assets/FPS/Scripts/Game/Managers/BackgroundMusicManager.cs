@@ -28,6 +28,11 @@ public class BackgroundMusicManager : MonoBehaviour
         }
     }
 
+    public void SetVolume(float volume)
+    {
+        bgmSource.volume = volume;
+    }
+
     private void PlayRandomTrack()
     {
         bgmSource.clip = bgmList[Random.Range(0, bgmList.Count)];

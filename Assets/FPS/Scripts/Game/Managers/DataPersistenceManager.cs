@@ -37,6 +37,8 @@ namespace Unity.FPS.Game
         {
             [Range(0.05f, 3f)]
             public float lookSensitivity;
+            [Range(0.0f, 1f)]
+            public float musicVolume;
             public bool weaponAutoSwitchOnPickup;
             public bool enableShadows;
             public bool isInvincible;

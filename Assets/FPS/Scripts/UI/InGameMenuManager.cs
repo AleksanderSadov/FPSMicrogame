@@ -19,6 +19,9 @@ namespace Unity.FPS.UI
         [Tooltip("Slider component for look sensitivity")]
         public Slider LookSensitivitySlider;
 
+        [Tooltip("Slider component for music volume")]
+        public Slider MusicVolumeSlider;
+
         [Tooltip("Toggle auto switching to new weapon on pickup")]
         public Toggle weaponAutoSwitchOnPickupToggle;
 
@@ -38,6 +41,7 @@ namespace Unity.FPS.UI
         PlayerWeaponsManager m_PlayerWeaponsManager;
         Health m_PlayerHealth;
         FramerateCounter m_FramerateCounter;
+        BackgroundMusicManager m_BackgroundMusicManager;
 
         void Start()
         {
@@ -55,10 +59,16 @@ namespace Unity.FPS.UI
             m_FramerateCounter = FindObjectOfType<FramerateCounter>();
             DebugUtility.HandleErrorIfNullFindObject<FramerateCounter, InGameMenuManager>(m_FramerateCounter, this);
 
+            m_BackgroundMusicManager = FindObjectOfType<BackgroundMusicManager>();
+            DebugUtility.HandleErrorIfNullFindObject<BackgroundMusicManager, InGameMenuManager>(m_BackgroundMusicManager, this);
+
             MenuRoot.SetActive(false);
 
             LookSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
             LookSensitivitySlider.value = DataPersistenceManager.Instance.currentSettings.lookSensitivity;
+
+            MusicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+            MusicVolumeSlider.value = DataPersistenceManager.Instance.currentSettings.musicVolume;
 
             weaponAutoSwitchOnPickupToggle.onValueChanged.AddListener(OnWeaponAutoSwitchOnPickupChanged);
             weaponAutoSwitchOnPickupToggle.isOn = DataPersistenceManager.Instance.currentSettings.weaponAutoSwitchOnPickup;
@@ -146,6 +156,7 @@ namespace Unity.FPS.UI
             DataPersistenceManager.SettingsSaveData settingsSaveData = DataPersistenceManager.Instance.currentSettings;
 
             settingsSaveData.lookSensitivity = LookSensitivitySlider.value;
+            settingsSaveData.musicVolume = MusicVolumeSlider.value;
             settingsSaveData.weaponAutoSwitchOnPickup = weaponAutoSwitchOnPickupToggle.isOn;
             settingsSaveData.enableShadows = ShadowsToggle.isOn;
             settingsSaveData.isInvincible = InvincibilityToggle.isOn;
@@ -157,6 +168,11 @@ namespace Unity.FPS.UI
         void OnMouseSensitivityChanged(float newValue)
         {
             m_PlayerInputsHandler.LookSensitivity = newValue;
+        }
+
+        void OnMusicVolumeChanged(float newValue)
+        {
+            m_BackgroundMusicManager.SetVolume(newValue);
         }
 
         void OnWeaponAutoSwitchOnPickupChanged(bool newValue)
