@@ -206,7 +206,8 @@ namespace Unity.FPS.Gameplay
                     Random.Range(-range, range)
                 );
                 NavMeshHit hit;
-                int maxDistance = 1;
+                int maxStepHeight = 6;
+                int maxDistance = maxStepHeight;
                 int walkableAreaMask = 1 << NavMesh.GetAreaFromName("Walkable"); // Need to bit shift area according to docs example
                 if (NavMesh.SamplePosition(randomPoint, out hit, maxDistance, walkableAreaMask))
                 {
