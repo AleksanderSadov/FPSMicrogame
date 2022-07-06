@@ -33,8 +33,8 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Kill wave objective prefab")]
         [SerializeField] private GameObject objectiveKillWave;
 
-        [Tooltip("Hoverbot without loot enemy prefab")]
-        [SerializeField] private GameObject enemyHoverbot;
+        [Tooltip("Hoverbots without loot enemy prefabs")]
+        [SerializeField] private List<GameObject> enemyHoverbots;
 
         [Tooltip("Hoverbot with loot enemy prefab")]
         [SerializeField] private GameObject enemyHoverbotWithLoot;
@@ -145,8 +145,27 @@ namespace Unity.FPS.Gameplay
                     break;
             }
 
-            enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyHoverbot, waveHoverbotsCount, lootHealthPack, lootHealthPackChance));
+            SpawnQueueAddRandomHoverbots();
+            SpawnQueueAddTurrets();
+        }
+
+        private void SpawnQueueAddRandomHoverbots()
+        {
+            for (int i = 0; i < waveHoverbotsCount; i++)
+            {
+                enemySpawnQueue.Add(new EnemySpawnQueueItem(GetRandomHoverbotVariant(), 1, lootHealthPack, lootHealthPackChance));
+            }
+        }
+
+        private void SpawnQueueAddTurrets()
+        {
             enemySpawnQueue.Add(new EnemySpawnQueueItem(enemyTurret, waveTurretsCount));
+        }
+
+        private GameObject GetRandomHoverbotVariant()
+        {
+            int randomIndex = Random.Range(0, enemyHoverbots.Count);
+            return enemyHoverbots[randomIndex];
         }
 
         private void SpawnWaveEnemies()

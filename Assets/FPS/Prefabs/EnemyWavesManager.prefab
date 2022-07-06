@@ -53,8 +53,11 @@ MonoBehaviour:
   enemiesParent: {fileID: 0}
   objectiveKillWave: {fileID: 1230498008701396792, guid: a50db6dad94fd954b88c91bb79f77643,
     type: 3}
-  enemyHoverbot: {fileID: 2015434656898269652, guid: 25a1b0efadb966e44889fce712c8ff8d,
-    type: 3}
+  enemyHoverbots:
+  - {fileID: 2015434656898269652, guid: 25a1b0efadb966e44889fce712c8ff8d, type: 3}
+  - {fileID: 931891621906388759, guid: 6e2d22636fd8cfd4ebe1e108419244d9, type: 3}
+  - {fileID: 3332420719163421430, guid: 054cb394348aa4646b57fbb6401af16a, type: 3}
+  - {fileID: 7496378593401923259, guid: cc92098b084ef7e43bf7c5993b171fdb, type: 3}
   enemyHoverbotWithLoot: {fileID: 7296742856028835559, guid: ed110acb703c6244f97aa2822d8105bd,
     type: 3}
   enemyTurret: {fileID: 2015434656898269652, guid: e29d43f43cc5d82499dd9926e01847d3,

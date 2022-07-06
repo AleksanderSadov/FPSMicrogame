@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &417907619320332362
 Transform:
   m_ObjectHideFlags: 0
@@ -137,6 +137,11 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6210296609234999804, guid: 4d1efaa062e333f4cbc4c3564702d135,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.29
+      objectReference: {fileID: 0}
     - target: {fileID: 6409866517097999930, guid: 4d1efaa062e333f4cbc4c3564702d135,
         type: 3}
       propertyPath: m_RootOrder
@@ -145,12 +150,12 @@ PrefabInstance:
     - target: {fileID: 6409866517097999930, guid: 4d1efaa062e333f4cbc4c3564702d135,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.012
       objectReference: {fileID: 0}
     - target: {fileID: 6409866517097999930, guid: 4d1efaa062e333f4cbc4c3564702d135,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.169
+      value: 0.009
       objectReference: {fileID: 0}
     - target: {fileID: 6409866517097999930, guid: 4d1efaa062e333f4cbc4c3564702d135,
         type: 3}
@@ -205,21 +210,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 913a07f080d559f4ba3093b85a18653a, type: 2}
+      objectReference: {fileID: 2100000, guid: 3d11eb559d3adb54a9b59e7bd6f37757, type: 2}
     - target: {fileID: 320366457763985525, guid: 25a1b0efadb966e44889fce712c8ff8d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 913a07f080d559f4ba3093b85a18653a, type: 2}
+      objectReference: {fileID: 2100000, guid: 3d11eb559d3adb54a9b59e7bd6f37757, type: 2}
     - target: {fileID: 320366457763985527, guid: 25a1b0efadb966e44889fce712c8ff8d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 913a07f080d559f4ba3093b85a18653a, type: 2}
+      objectReference: {fileID: 2100000, guid: 3d11eb559d3adb54a9b59e7bd6f37757, type: 2}
     - target: {fileID: 2015434656898269652, guid: 25a1b0efadb966e44889fce712c8ff8d,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_HoverBotGold
+      value: Enemy_HoverBot_Gold
       objectReference: {fileID: 0}
     - target: {fileID: 2015434656898269656, guid: 25a1b0efadb966e44889fce712c8ff8d,
         type: 3}
@@ -280,6 +285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: score
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: 25a1b0efadb966e44889fce712c8ff8d,
+        type: 3}
+      propertyPath: LootPrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25a1b0efadb966e44889fce712c8ff8d, type: 3}
