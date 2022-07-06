@@ -82,7 +82,7 @@ MonoBehaviour:
   AmmoReloadDelay: 2
   MaxAmmo: 2
   AutomaticReleaseOnCharged: 0
-  MaxChargeDuration: 1
+  MaxChargeDuration: 0.5
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
   WeaponAnimator: {fileID: 0}
