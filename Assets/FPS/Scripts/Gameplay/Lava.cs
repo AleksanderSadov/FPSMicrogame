@@ -12,6 +12,8 @@ namespace Unity.FPS.Gameplay
         public bool isLifted = false;
         public bool isLowered = false;
 
+        [SerializeField] private ParticleSystem lavaSmoke;
+
         [SerializeField] private float currentIntensity = 1.0f;
         [SerializeField] private float minIntensity = 1.0f;
         [SerializeField] private float heatSpeed = 4;
@@ -41,6 +43,7 @@ namespace Unity.FPS.Gameplay
             HandleLavaHeat();
             HandleLavaLift();
             HandleLavaSound();
+            HandleLavaSmoke();
         }
 
         public void StartHeating()
@@ -163,6 +166,24 @@ namespace Unity.FPS.Gameplay
                 if (audioSource.isPlaying)
                 {
                     audioSource.Pause();
+                }
+            }
+        }
+
+        private void HandleLavaSmoke()
+        {
+            if (startHeating || isHeated)
+            {
+                if (!lavaSmoke.isPlaying)
+                {
+                    lavaSmoke.Play();
+                }
+            }
+            else
+            {
+                if (lavaSmoke.isPlaying)
+                {
+                    lavaSmoke.Stop();
                 }
             }
         }
