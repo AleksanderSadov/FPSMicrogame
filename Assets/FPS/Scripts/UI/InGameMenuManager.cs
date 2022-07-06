@@ -37,6 +37,9 @@ namespace Unity.FPS.UI
         [Tooltip("GameObject for the controls")]
         public GameObject ControlImage;
 
+        [Tooltip("Invisibility panel. Always show in editor for convinience but hide in prod")]
+        public GameObject InvincibilityPanel;
+
         PlayerInputHandler m_PlayerInputsHandler;
         PlayerWeaponsManager m_PlayerWeaponsManager;
         Health m_PlayerHealth;
@@ -81,6 +84,8 @@ namespace Unity.FPS.UI
 
             FramerateToggle.onValueChanged.AddListener(OnFramerateCounterChanged);
             FramerateToggle.isOn = DataPersistenceManager.Instance.currentSettings.showFramerate;
+
+            ShowInvisibilityPanelInEditor();
         }
 
         void Update()
@@ -124,6 +129,19 @@ namespace Unity.FPS.UI
         public void ClosePauseMenu()
         {
             SetPauseMenuActivation(false);
+        }
+
+        private void ShowInvisibilityPanelInEditor()
+        {
+            if (Application.isEditor)
+            {
+                InvincibilityPanel.SetActive(true);
+            }
+            else
+            {
+                InvincibilityPanel.SetActive(false);
+                InvincibilityToggle.isOn = false;
+            }
         }
 
         void SetPauseMenuActivation(bool active)
