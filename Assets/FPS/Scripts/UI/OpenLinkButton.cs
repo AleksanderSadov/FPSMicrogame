@@ -8,15 +8,6 @@ namespace Unity.FPS.UI
     {
         public string linkUrl = "";
 
-        void Update()
-        {
-            if (EventSystem.current.currentSelectedGameObject == gameObject
-                && Input.GetButtonDown(GameConstants.k_ButtonNameSubmit))
-            {
-                LoadTargetUrl();
-            }
-        }
-
         public void LoadTargetUrl()
         {
             Application.OpenURL(linkUrl);

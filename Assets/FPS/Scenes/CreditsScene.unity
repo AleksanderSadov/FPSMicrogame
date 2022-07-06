@@ -254,9 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1618747977}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -701,11 +701,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnDown: {fileID: 1755736759}
+    m_SelectOnLeft: {fileID: 1630840749}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -792,13 +792,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem (4)
+      value: Lava Materials
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://assetstore.unity.com/packages/2d/textures-materials/stylized-lava-materials-180943
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 600246162}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 129299356}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 1618747977}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1054,6 +1074,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577113257}
   m_CullTransparentMesh: 0
+--- !u!114 &600246162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 786946995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &668473440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1064,13 +1096,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem (1)
+      value: FPSMicrogame
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://learn.unity.com/project/fps-template
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 238818649}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 921891768}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnLeft
+      value: 
+      objectReference: {fileID: 680917961}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1189,6 +1241,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 668473440}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &680917961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 4325606596622529344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &747804413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,13 +1303,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem (2)
+      value: Fire & Spell Effects
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://assetstore.unity.com/packages/vfx/particles/fire-explosions/fire-spell-effects-36825
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 680917961}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1554145288}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 921891768}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1444,6 +1528,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &921891768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1908150554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &960963493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,12 +1937,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 680917961}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 2109832851}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2274,6 +2370,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111806771}
   m_CullTransparentMesh: 1
+--- !u!114 &1554145288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 307858180}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1618747977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1674719236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1630840746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,12 +2461,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 1755736759}
+    m_SelectOnLeft: {fileID: 2109832851}
+    m_SelectOnRight: {fileID: 238818649}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2432,13 +2552,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem (5)
+      value: Enflame
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://assetstore.unity.com/packages/vfx/particles/fire-explosions/enflame-stylized-fire-smoke-and-sparks-shader-graph-192906#content
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 921891768}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 129299356}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnLeft
+      value: 
+      objectReference: {fileID: 1554145288}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2694,6 +2834,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722679958}
   m_CullTransparentMesh: 0
+--- !u!114 &1755736759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 668473440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1833309139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705b060d91dd25446a76cfc9640acee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSelection: {fileID: 0}
+  DefaultSelection: {fileID: 129299356}
 --- !u!1001 &1908150554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3137,13 +3289,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem (3)
+      value: Sci-FI Music Pack 1
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://assetstore.unity.com/packages/audio/music/sci-fi-music-pack-1-105576
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1755736759}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1618747977}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnLeft
+      value: 
+      objectReference: {fileID: 600246162}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3504,12 +3676,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 680917961}
+    m_SelectOnLeft: {fileID: 1011775486}
+    m_SelectOnRight: {fileID: 1630840749}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3807,13 +3979,33 @@ PrefabInstance:
     - target: {fileID: 1093332412341368176, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Name
-      value: AssetItem
+      value: UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3171760667008498814, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: linkUrl
       value: https://unity.com/
       objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1011775486}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 600246162}
+    - target: {fileID: 7639669204145052203, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 1755736759}
     - target: {fileID: 7996390507382806179, guid: 20cbafb9d0e465648b6b883eea4cb2b3,
         type: 3}
       propertyPath: m_Pivot.x
